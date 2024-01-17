@@ -13,7 +13,7 @@ class CheckPermission
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next, string ...$permissions): Response
     {
@@ -25,7 +25,7 @@ class CheckPermission
 
         $user = Auth::user();
 
-        if (!$user->permissions()->wherein('name', $permissions)->exists()) {
+        if (!$user->permissions()->whereIn('name', $permissions)->exists()) {
             return Response()->json([
                 'message' => 'Access denied!'
             ], HttpResponse::HTTP_FORBIDDEN);
