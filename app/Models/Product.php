@@ -12,8 +12,18 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
+        'image',
         'price',
         'grammage',
         'status',
     ];
+
+    public function imagePath()
+    {
+        if ($this->image) {
+            return storage_path("app/public/products/{$this->id}/{$this->image}");
+        }
+
+        return null;
+    }
 }
