@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function store(CreateProductRequest $request)
     {
         $productData = $request->validated();
-
+        unset($productData['image']);
         $product = Product::create($productData);
 
         if ($request->has('image')) {
