@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-
-use function PHPSTORM_META\type;
 
 class AuthController extends Controller
 {
@@ -24,9 +23,12 @@ class AuthController extends Controller
 
         $user = User::create($userData);
 
+        $role = Permission::where('name', 'CUSTOMER')->first();
+        $user->permissions()->attach($role);
+
         return response()->json([
-            'message'   => 'Successfully registered!',
-            'user'      => $user
+            'message' => 'Successfully registered!',
+            'user' => $user
         ], Response::HTTP_CREATED);
     }
 
