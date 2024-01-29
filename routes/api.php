@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::prefix('/v1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::delete('/logout', [AuthController::class, 'logout'])->middleware(['auth:api']);
+    Route::post('/send-code', [ResetPasswordController::class, 'requestCode']);
+    Route::post('/verify-token', [ResetPasswordController::class, 'verifyCode']);
 
     Route::prefix('/products')->group(function () {
         Route::get('/', [ProductController::class, 'index']);

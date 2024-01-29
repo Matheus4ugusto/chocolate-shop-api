@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
+use App\Jobs\InvoicePaid;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -119,6 +120,8 @@ class OrderController extends Controller
 
                 $order->status = 'PAID';
                 $order->save();
+
+                InvoicePaid::dispatch($order);
 
                 return response()->json(['status' => 'Order paid successfully!']);
 
