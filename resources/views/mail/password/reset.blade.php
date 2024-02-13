@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recuperação de Senha</title>
+    <title>OTP</title>
 
     <style>
         body {
@@ -38,19 +39,20 @@
         }
     </style>
 </head>
+
 <body>
-<div>
-    <h2>Recuperação de Senha</h2>
-    <p>Olá, {{$token->user->name}}!</p>
-    <p>Recebemos uma solicitação para recuperar a senha da sua conta. Utilize o código abaixo para redefinir sua
-        senha:</p>
+    <div>
+        <h2>Código OTP</h2>
+        <p>Olá, {{$token->user->name}}!</p>
+        <p>Recebemos uma solicitação de código de acesso único, utilize o seguinte código para fazer login:</p>
 
-    <p style="font-size: 20px; color: #0066cc; font-weight: bold;">{{ $token->token }}</p>
+        <p style="font-size: 20px; color: #0066cc; font-weight: bold;">{{ $token->token }}</p>
 
-    <p>Este código é válido por 1 hora. Se você não solicitou a recuperação da senha, ignore este e-mail.</p>
-    <p>Obrigado!</p>
-</div>
+        <p>Este código é válido por 1 hora. Se você não solicitou o OTP, ignore este e-mail.</p>
+        <p>Obrigado!</p>
+    </div>
 
-<p class="footer">Equipe de Suporte - Chocolate Shop</p>
+    <p class="footer">Equipe de Suporte - Chocolate Shop</p>
 </body>
+
 </html>

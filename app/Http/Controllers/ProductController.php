@@ -77,7 +77,7 @@ class ProductController extends Controller
     private function ProductFile(Request $request, Product $product, string $field)
     {
         $file = $this->uploadFile($request->get($field));
-        $extension = Arr::last(explode('/', $file->getMimeType()));
+        $extension = Arr::last(explode('/', mime_content_type($request->get($field))));
         $fileName = $product->id . "-{$field}" . time() . ".{$extension}";
 
         $file->storeAs('public/products/' . $product->id, $fileName);
